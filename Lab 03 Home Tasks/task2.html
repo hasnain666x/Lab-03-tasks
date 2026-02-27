@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Task 2</title>
+</head>
+<body>
+    <p id="output">Downloading image...</p>
+
+    <script>
+        function downloadImage(url) {
+            return new Promise(function(resolve, reject) {
+                
+                setTimeout(function() {
+                    
+                    let isSuccessful = true;
+                    
+                    if (isSuccessful) {
+                        resolve("Image downloaded successfully from: " + url);
+                    } else {
+                        reject("Error: Failed to download image.");
+                    }
+
+                }, 2000); 
+            });
+        }
+        downloadImage("https://example.com/image.jpg")
+            .then(function(message) {
+                document.getElementById("output").innerText = message;
+                console.log(message);
+            })
+            .catch(function(error) {
+                document.getElementById("output").innerText = error;
+                console.error(error);
+            });
+    </script>
+</body>
+</html>

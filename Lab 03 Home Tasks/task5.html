@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Task 5</title>
+</head>
+<body>
+    <p id="output">Waiting for winner...</p>
+
+    <script>
+        const promise1 = new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve("Promise 1 won! (Resolved in 1 second)");
+            }, 1000);
+        });
+        const promise2 = new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve("Promise 2 won! (Resolved in 3 seconds)");
+            }, 3000);
+        });
+        Promise.race([promise1, promise2])
+            .then(function(result) {
+                console.log(result);
+                document.getElementById("output").innerText = result;
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+    </script>
+</body>
+</html>

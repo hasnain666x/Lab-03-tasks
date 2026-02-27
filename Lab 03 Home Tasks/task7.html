@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>Task 7</title>
+</head>
+<body>
+    <p id="output">Processing...</p>
+    <script>
+        function login(username, password) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    console.log("User logged in");
+                    resolve({ userId: 1, username: username });
+                }, 2000);
+            });
+        }
+        function getProfile(userId) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+
+                    let isError = false; 
+
+                    if (isError) {
+                        reject("Error: Failed to fetch profile.");
+                    } else {
+                        resolve({
+                            userId: userId,
+                            name: "Ayesha",
+                            email: "ayesha@example.com"
+                        });
+                    }
+
+                }, 2000);
+            });
+        }
+        async function handleUser() {
+            try {
+                const user = await login("ayesha123", "12345");
+                console.log("Login successful:", user);
+
+                const profile = await getProfile(user.userId);
+
+                document.getElementById("output").innerText =
+                    "Name: " + profile.name +
+                    " | Email: " + profile.email;
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById("output").innerText = "Something went wrong!";
+            }
+        }
+        handleUser();
+    </script>
+</body>
+</html>

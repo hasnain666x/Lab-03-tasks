@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Task 8</title>
+</head>
+<body>
+    <input type="file" id="fileInput" accept=".txt">
+    <script>
+        const fileInput = document.getElementById("fileInput");
+
+        fileInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    console.log("File Content:");
+                    console.log(e.target.result);
+                };
+
+                reader.onerror = function() {
+                    console.error("Error reading file.");
+                };
+
+                reader.readAsText(file);
+            }
+        });
+    </script>
+</body>
+</html>

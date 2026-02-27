@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Task 1</title>
+</head>
+<body>
+    <p id="output">Waiting for greeting...</p>
+    <script>
+        function sayHello(name, callback) {
+            setTimeout(function() {
+                const message = "Hello " + name + "!";
+                callback(message);
+            }, 3000);
+        }
+        function showMessage(greeting) {
+            document.getElementById("output").innerText = greeting;
+            console.log(greeting);
+        }
+        sayHello("Ayesha", showMessage);
+    </script>
+
+</body>
+</html>

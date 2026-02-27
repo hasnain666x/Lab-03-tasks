@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Task 9</title>
+</head>
+<body>
+    <p id="counter">Loading counter...</p>
+    <script>
+        let counter = sessionStorage.getItem("reloadCounter");
+
+        if (counter === null) {
+            counter = 0;
+        } else {
+            counter = parseInt(counter); 
+        }
+        counter++;
+        sessionStorage.setItem("reloadCounter", counter);
+        document.getElementById("counter").innerText = "Page reload count: " + counter;
+    </script>
+</body>
+</html>

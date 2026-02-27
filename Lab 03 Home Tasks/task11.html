@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Task 11</title>
+</head>
+<body>
+    <p id="output">Check console for results.</p>
+    <script>
+        const buffer = new ArrayBuffer(16);
+        const uint8 = new Uint8Array(buffer);
+        for(let i = 0; i < uint8.length; i++) {
+            uint8[i] = i * 10;  
+        }
+        console.log("Uint8Array values:", uint8);
+        const decoder = new TextDecoder("utf-8");
+        try {
+            const decodedText = decoder.decode(buffer);
+            console.log("Decoded text:", decodedText);
+        } catch (error) {
+            console.error("Decoding error:", error);
+        }
+        document.getElementById("output").innerText = "Open console to see ArrayBuffer and decoding results.";
+    </script>
+</body>
+</html>

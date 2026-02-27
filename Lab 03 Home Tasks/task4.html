@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 4</title>
+</head>
+<body>
+    <p id="output">Processing...</p>
+
+    <script>
+        function login(username, password) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    console.log("User logged in");
+                    resolve({ userId: 1, username: username });
+                }, 2000);
+            });
+        }
+        function getProfile(userId) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+
+                    let isError = true; 
+
+                    if (isError) {
+                        reject("Error: Failed to fetch profile.");
+                    } else {
+                        resolve({
+                            userId: userId,
+                            name: "Ayesha",
+                            email: "ayesha@example.com"
+                        });
+                    }
+
+                }, 2000);
+            });
+        }
+        login("ayesha123", "12345")
+            .then(function(user) {
+                console.log("Login successful:", user);
+                return getProfile(user.userId);
+            })
+            .then(function(profile) {
+                document.getElementById("output").innerText =
+                    "Name: " + profile.name + 
+                    " | Email: " + profile.email;
+            })
+            .catch(function(error) {
+                console.error(error);
+                document.getElementById("output").innerText = "Something went wrong!";
+            });
+    </script>
+</body>
+</html>

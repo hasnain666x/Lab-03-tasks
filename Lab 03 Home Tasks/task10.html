@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Task 10</title>
+</head>
+<body>
+    <input type="text" id="messageInput" placeholder="Type your message">
+    <button id="sendBtn">Send</button>
+    <p id="status">Connecting to WebSocket...</p>
+    <p id="received"></p>
+    <script>
+        const socket = new WebSocket("wss://echo.websocket.events");
+        const status = document.getElementById("status");
+        const received = document.getElementById("received");
+        const sendBtn = document.getElementById("sendBtn");
+        const messageInput = document.getElementById("messageInput");
+        socket.addEventListener('open', function (event) {
+            status.innerText = "WebSocket connected";
+        });
+        socket.addEventListener('message', function (event) {
+            console.log("Message from server:", event.data);
+            received.innerText = "Received: " + event.data;
+        });
+        sendBtn.addEventListener("click", function() {
+            const message = messageInput.value;
+            if(message) {
+                socket.send(message);
+                console.log("Sent:", message);
+                messageInput.value = ""; 
+            }
+        });
+        socket.addEventListener('error', function(event) {
+            console.error("WebSocket error:", event);
+            status.innerText = "WebSocket error!";
+        });
+        socket.addEventListener('close', function(event) {
+            console.log("WebSocket closed");
+            status.innerText = "WebSocket disconnected";
+        });
+    </script>
+</body>
+</html>

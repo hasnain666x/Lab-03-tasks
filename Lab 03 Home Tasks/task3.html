@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Task 3</title>
+</head>
+<body>
+    <p id="output">Loading...</p>
+
+    <script>
+        function fetchProductIDs() {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    console.log("Product IDs fetched");
+                    resolve([101, 102, 103, 104]); // list of IDs
+                }, 2000);
+            });
+        }
+        function fetchProductDetails(productID) {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    console.log("Details fetched for product:", productID);
+                    
+                    resolve({
+                        id: productID,
+                        name: "Product " + productID,
+                        price: "$100"
+                    });
+
+                }, 2000);
+            });
+        }
+        fetchProductIDs()
+            .then(function(ids) {
+                console.log("Received IDs:", ids);
+                return fetchProductDetails(ids[0]);
+            })
+            .then(function(product) {
+                document.getElementById("output").innerText =
+                    "Product ID: " + product.id +
+                    " | Name: " + product.name +
+                    " | Price: " + product.price;
+            })
+            .catch(function(error) {
+                console.error("Error:", error);
+                document.getElementById("output").innerText = "Something went wrong!";
+            });
+
+    </script>
+
+</body>
+</html>
